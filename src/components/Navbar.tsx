@@ -32,6 +32,13 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="btn-tracking p-2 hover:text-primary"
+            aria-label="Toggle dark mode"
+          >
+            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
           <Link to="/cart" className="relative p-2 btn-tracking">
             <ShoppingBag className="w-6 h-6" />
             {totalItems > 0 && (
