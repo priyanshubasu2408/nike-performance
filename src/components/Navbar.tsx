@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const { totalItems } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
