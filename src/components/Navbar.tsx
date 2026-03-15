@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useTheme } from "@/hooks/use-theme";
 import { useState } from "react";
 
 const Navbar = () => {
   const { totalItems } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
@@ -30,6 +32,13 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="btn-tracking p-2 hover:text-primary"
+            aria-label="Toggle dark mode"
+          >
+            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
           <Link to="/cart" className="relative p-2 btn-tracking">
             <ShoppingBag className="w-6 h-6" />
             {totalItems > 0 && (

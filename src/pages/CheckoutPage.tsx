@@ -16,9 +16,24 @@ const CheckoutPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(`GA4 Event Trigger: purchase | Total Items: ${items.length} | Total: $${totalPrice}`);
-    toast.success("Order placed successfully!");
+    const orderId = `NP-${Date.now().toString(36).toUpperCase()}`;
+    const orderItems = items.map((i) => ({
+      name: i.product.name,
+      quantity: i.quantity,
+      price: i.product.price,
+      size: i.size,
+    }));
     clearCart();
-    navigate("/");
+    toast.success("Order placed successfully!");
+    navigate("/order-status", {
+      state: {
+        orderId,
+        name: form.name,
+        email: form.email,
+        items: orderItems,
+        total: totalPrice,
+      },
+    });
   };
 
   const update = (key: string, value: string) =>
